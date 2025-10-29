@@ -1,37 +1,38 @@
-# name: CI/CD Piprline
+name: CI/CD Piprline
 
-# on:
-#   push:
-#     branches:
-#       - main
+on:
+  push:
+    branches:
+      - main
 
-# jobs:
-#   build:
-#     runs-on: ubuntu-latest
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-#     steps:
-#       - name: checkout code
-#         uses: actions/checkout@v4
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
 
-#       - name: setup python
-#         uses: actions/setup-python@v5
-#         with:
-#           pytjon-version: 3.10
+      - name: setup python
+        uses: actions/setup-python@v5
+        with:
+          pytjon-version: 3.10
         
-#       - name: install dependencies
-#         run: |
-#           cd app
-#           pip install -r requirementes.txt
+      - name: install dependencies
+        run: |
+          cd app
+          pip install -r requirementes.txt
         
-#       - name: build docker image
-#         run: docker build -t flask-devops
+      - name: build docker image
+        run: docker build -t flask-devops
 
-#       - name: login to docker hub
-#         uses: docker/login-action@v3
-#         with:
-#           username: ${{ secrets.DOCKERHUB.USERNAME }}
-#           password: ${{ secrets.DOCKERHUB.TOKEN }}
+      - name: login to docker hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB.USERNAME }}
+          password: ${{ secrets.DOCKERHUB.TOKEN }}
 
-#       - name: push image to docker hub
-#         run: |
-#           docker tag flask-devops ${{  }}
+      - name: push image to docker hub
+        run: |
+          docker tag flask-devops ${{ secrets.DOCKERHUB.USERNAME }}/flask-devops:latest
+          docker push ${{ secrets.DOCKERHUB.USERNAME }}/flask-devops:latest
