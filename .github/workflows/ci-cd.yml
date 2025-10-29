@@ -25,7 +25,7 @@ jobs:
 
       - name: Run basic tests
         run: |
-          echo "✅ No tests yet, pipeline working!"
+          echo "No tests yet, pipeline working!"
 
       - name: Build Docker image
         run: docker build -t flask-devops .
